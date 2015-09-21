@@ -16,9 +16,8 @@ print "Socket created"
 
 host = "www.google.com"
 
-try:
+try:	
 	remote_ip = socket.gethostbyname(host)
-	# TU CODIGO AQUI
 	# Encuentre el IP dado el nombre de servidor en la variable 'host'
 	# y almacenelo en una variable llamada 'remote_ip'
 	
@@ -27,8 +26,6 @@ except socket.gaierror:
 	sys.exit()
 
 print "La direccion IP de www.google.com es [%s]" % (remote_ip)
-
-# TU CODIGO AQUI
 # Imprima por pantalla un mensaje que diga
 # La direccion IP de www.google.com es 216.58.192.100
 # el numero IP puede variar y debe ser leido de la variable remote_ip

@@ -25,7 +25,7 @@ except socket.gaierror:
 	print "Hostname could not be resolved. Exiting"
 	sys.exit()
 
-print "La direccion IP de www.google.com es [%s]" % (remote_ip)
+print "La direccion IP de %s es %s" % (host,remote_ip)
 # Imprima por pantalla un mensaje que diga
 # La direccion IP de www.google.com es 216.58.192.100
 # el numero IP puede variar y debe ser leido de la variable remote_ip
