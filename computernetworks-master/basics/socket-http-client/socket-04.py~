@@ -22,7 +22,6 @@ port=80
 try:
 	# TU CODIGO AQUI
 	remote_ip = socket.gethostbyname(host)
-	hostip=remote_ip
 	# Encuentre el IP dado el nombre de servidor en la variable 'host'
 	# y almacenelo en una variable llamada 'remote_ip'
 except socket.gaierror:
@@ -37,7 +36,7 @@ print "La direccion IP de %s es %s" % (host,remote_ip)
 
 s.connect((remote_ip, port))
 
-print "Socket connected to " + host + " on ip " + hostip
+print "Socket connected to " + host + " on ip " + remote_ip
 
 # Datos a enviarse
 message = "GET / HTTP/1.1\r\n\r\n"
