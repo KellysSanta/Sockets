@@ -24,7 +24,7 @@ while 1:
 	# Esperar por una conexion
 	conn, addr = s.accept()
 	print "Conectado con " + addr[0] + ":" + str(addr[1])
-	# Ahora se le envia una informacion al cliente
+	# Ahora se le recive la informacion del cliente
 	data = conn.recv(1024)
 	reply = "OK..." + data
 	if not data:

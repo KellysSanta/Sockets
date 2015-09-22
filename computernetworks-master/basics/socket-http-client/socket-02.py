@@ -26,6 +26,6 @@ except socket.gaierror:
 	sys.exit()
 
 print "La direccion IP de %s es %s" % (host,remote_ip)
-# Imprima por pantalla un mensaje que diga
-# La direccion IP de www.google.com es 216.58.192.100
+# Imprima por pantalla un mensaje con
+# La direccion IP de www.google.com
 # el numero IP puede variar y debe ser leido de la variable remote_ip

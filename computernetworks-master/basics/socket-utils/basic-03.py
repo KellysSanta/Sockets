@@ -1,6 +1,5 @@
 #!/usr/bin/python
-#
-# This program returns the name of a service given its port number
+# Este programa retorna el nombre de un servicio dado su numero de puerto
 #
 import socket
 
