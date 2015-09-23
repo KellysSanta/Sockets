@@ -1,7 +1,7 @@
 #!/usr/bin/python
 #
 # Este programa muestra como a traves de la clase socket se puede obtener el
-# IP de una maquina dado su nombre
+# IP de una maquina dado su nombre por medio del metodo gethostbyname
 #
 import socket
 

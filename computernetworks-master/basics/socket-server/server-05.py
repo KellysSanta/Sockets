@@ -20,8 +20,35 @@ print 'Socket bind complete'
 s.listen(10)
 print 'Socket bind complete'
 
-# Vaya a la pagina 
-# http://www.binarytides.com/python-socket-programming-tutorial/
-# En particular a la seccion 'Handling Connections' y explique que es lo que
-# pretende hacer esta nueva parte del codigo. Adicionelo a este programa
+#Funcion para el manejo de conexiones por medio de hilos
+def clientthread(conn,addr):
+    #Envio de mensaje de bienvenida al cliente
+    conn.send('Welcome to the server. Type something and hit enter\n') #send only takes string
+
+    #ciclo infinito para recepcion de mensajes
+    while True:
+
+        #Lectura de datos que envia el cliente
+        data = conn.recv(1024)
+        reply = 'OK...' + data
+        if not data:
+            print "Cierre conexion con:"+str(addr[0])
+            break
+
+        conn.sendall(reply)
+
+    #cierre de la conexion
+    conn.close()
+
+
+#ahora hablaremos con el cliente con ayuda de la funcion clientthread
+while 1:
+    #Espera por aceptar la conexion de un cliente
+    conn, addr = s.accept()
+    print 'Connected with ' + addr[0] + ':' + str(addr[1])
+
+    #Abrimos un hilo con la funcion clientthread
+    start_new_thread(clientthread(conn,addr))
+
+s.close()
 

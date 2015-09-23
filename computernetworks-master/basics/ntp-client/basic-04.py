@@ -1,6 +1,5 @@
 #!/usr/bin/python
-#
-# This program asks a NTP server for the current hour and prints it
+# Este programa pregunta a un servidor NTP por la fecha y la hora y lo imprime
 #
 import ntplib
 from time import ctime

@@ -6,12 +6,11 @@
 # regresa tal cual al cliente. Si el cliente envia un 'hola mundo' el servidor
 # le regresara un 'hola mundo'.
 #
-#Â En este programa el cliente digitara una cadena se la enviara al servidor
-#Â y este enviara la cadena de vuelta en pedazos de 16 bytes.
+# En este programa el cliente digitara una cadena se la enviara al servidor
+# y este enviara la cadena de vuelta en pedazos de 16 bytes.
 #
 # Complete el programa en aquellas lineas que dice # tu codigo aqui
-# 
-
+#
 import socket 
 import sys
 import argparse
@@ -20,30 +19,57 @@ host = 'localhost'
 
 def echo_client(port): 
 	# Cree un socket IPv4 y de tipo TCP
-	# tu codigo aqui
-	server_address = (host, port)
-	print "Connecting to %s port %s"%server_address
+    try: # esta estructura permite capturar comportamientos anomalos
+        s = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
+    except socket.error, msg: # si es del tipo socket.error
+	    print "Error on the socket's creation: " + str(msg[0]) + ", error message: " + msg[1]
+	    sys.exit()
+
+    print "Socket cliente creado"
+
+
+    try:
+        remote_ip = socket.gethostbyname(host)
+        print "IPs hostname es :" + str(remote_ip)
+	# Encuentre el IP dado el nombre de servidor en la variable 'host'
+	# y almacenelo en una variable llamada 'remote_ip'
+    except socket.gaierror:
+        print "Error hostname."
+        sys.exit()
+
+    # tu codigo aqui
+    server_address = (host, port)
+    server_addressip = (remote_ip, port)
+    print "Conectando a %s port %s"%server_address
+
 	# Conectese con el servidor
-	# tu codigo aqui
-	try:
+    s.connect((remote_ip, port))
+    print "Conexion establecida correctamente."
+
+    # tu codigo aqui
+    try:
 		# El usuario digita la frase a enviar al servidor y lo guarda
-		# en una variable llamada message
-		# tu codigo aqui
-		print "Sending %s"%message
-		# Envie datos
-		# tu codigo aqui
-		amount_received = 0
-		amount_expected = len(message)
-		while amount_received < amount_expected:
+        message = raw_input("Digita tu mensaje >> ")
+        # en una variable llamada message
+        #  tu codigo aqui
+        print "\nEnviando %s"%message
+        # Envie datos
+        # tu codigo aqui
+        s.send(message)
+
+        amount_received = 0
+        amount_expected = len(message)
+        while amount_received < amount_expected:
 			# Reciba datos, no mas de 16 bytes
-			# tu codigo aqui
-			amount_received += len(data)
-			print "Received: %s"%data
-	except socket.errno, e:
-		print "Socket error: %s"%str(e)
-	except Exception, e:
-		print "Other exception: %s"%str(e)
-	finally:
+            #tu codigo aqui
+            data = s.recv(16) #determina que se recibiran paquetes de 16 bits
+            amount_received += len(data)
+            print "Recibe: %s"%data
+    except socket.errno, e:
+        print "Socket error: %s"%str(e)
+    except Exception, e:
+        print "Other exception: %s"%str(e)
+    finally:
 		print "Closing connection to the server"
 		s.close()
 			
